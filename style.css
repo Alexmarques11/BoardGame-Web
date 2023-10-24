@@ -1,0 +1,65 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-image: url("background.jpg");
+  background-size: cover;
+}
+
+.personagem {
+  width: 75px;
+  height: 75px;
+  background-color: #ff5733;
+  border-radius: 50%;
+  position: relative;
+  left: 37.5px; 
+  top: 5px;
+}
+
+
+
+.tabuleiro {
+  margin: 0 auto; 
+  border-collapse: collapse;
+}
+
+.tabuleiro td {
+  width: 150px;
+  height: 150px;
+  border: 2px solid #ffffff;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+@keyframes move {
+  from { left: 0; top: 0; }
+  to { left: 200; top: 200; }
+}
+
+.personagem.move {
+  animation: move 2s linear forwards;
+}
+
+.buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #390514;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
