@@ -4,62 +4,167 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-image: url("background.jpg");
+  background-color: rgb(46, 37, 48);
   background-size: cover;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.score {
+  font-size: 18px;
+  color: #fff;
+}
+
+.vidas{
+  font-size: 18px;
+  color: #fff;
+
+}
+
+.temporizador {
+  font-size: 18px;
+  color: #fff;
+}
+
+#pontuacao, #vidas {
+  display: inline;
+  margin-right: 15px;
+  font-weight: bold;
+  margin-left: 5px;
+  color: #b1949c;
+}
+
+#tempo{
+  display: inline;
+  margin-right: 5px;
+  font-weight: bold;
+  margin-left: 5px;
+  color: #b1949c;
 }
 
 .personagem {
   width: 75px;
   height: 75px;
-  background-color: #ff5733;
+  background-color: #b1949c;
   border-radius: 50%;
   position: relative;
-  left: 37.5px; 
-  top: 5px;
+  left: 25px;
+  top: 3px;
 }
 
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(46, 37, 48);
+}
+
+
+.tabuleiro-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 10px; 
+  margin-top: 50px;
+}
 
 .tabuleiro {
-  margin: 0 auto; 
+  margin: 0;
   border-collapse: collapse;
 }
 
 .tabuleiro td {
-  width: 150px;
-  height: 150px;
-  border: 2px solid #ffffff;
+  width: 120px;
+  height: 120px;
+  border: 2px solid #000000;
   text-align: center;
   font-size: 24px;
   font-weight: bold;
 }
 
-@keyframes move {
-  from { left: 0; top: 0; }
-  to { left: 200; top: 200; }
+.inventario-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.personagem.move {
-  animation: move 2s linear forwards;
-}
-
-.buttons {
-  text-align: center;
+.inventario {
+  border-collapse: separate;
+  border-spacing: 5px;
   margin-top: 20px;
 }
 
+.inventario td {
+  width: 75px;
+  height: 75px;
+  border-radius: 20px;
+  border: 2px solid #00000000;
+  text-align: center;
+  background-color: #b1949c;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -40px; 
+  margin-left: 15px;
+}
+
 button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #390514;
-  color: #fff;
+  width: 100px;
+  height: 34px;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #b1949c;
+  color: #000000;
   border: none;
   cursor: pointer;
-  margin: 0 10px;
+  margin: 10px 0;
+  border-radius: 10px;
 }
 
-button:hover {
-  background-color: #0056b3;
+.circle1 {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 3px solid #b1949c;
+  border-top: 2px solid rgb(0, 0, 0);
+  animation: ani1 3s linear infinite;
 }
 
+.circle2 {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid #b1949c;
+  border-top: 3px solid rgb(0, 0, 0);
+  animation: ani2 3s linear infinite;
+}
 
+@keyframes ani1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ani2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
