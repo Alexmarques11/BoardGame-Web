@@ -3,33 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>Jogo com Personagem</title>
+    <title>PacMandaTemu</title>
 </head>
 <body>
   <div class="container">
+    <div id="game-over" class="game-over" style="display: none;">
+      Game Over!
+    </div>
+    <div id="pauseText" class="pauseText" style="display: none;">
+      Pause
+    </div>
     <div class="tabuleiro-container">
       <div class="header">
         <div class="score">Score: <span id="pontuacao">0</span></div>
         <div class="vidas">Lives: <span id="vidas">3</span></div>
-        <div class="temporizador">Time Left: <span id="tempo">60</span>seconds</div>
+        <div class="temporizador">Time Left: <span id="tempo"></span></div>
       </div>
       <table class="tabuleiro" id="tabuleiro">
         <tr>
           <td>
-            <div class="personagem" id="personagem"></div>
+            <div class="celula" id="celula-0-0"></div>
+            <div id="personagem" class="personagem">
+              <div class="personagem__eye"></div>
+              <div class="personagem__mouth"></div>
+            </div>
+        
           </td>
-          <td></td>
-          <td></td>
+          <td>
+            <div class="celula" id="celula-0-1"></div>
+          </td>
+          <td>
+            <div class="celula" id="celula-0-2"></div>
+          </td>
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>
+            <div class="celula" id="celula-1-0"></div>
+          </td>
+          <td>
+            <div class="celula" id="celula-1-1"></div>
+          </td>
+          <td>
+            <div class="celula" id="celula-1-2"></div>
+          </td>
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>
+            <div class="celula" id="celula-2-0"></div>
+          </td>
+          <td>
+            <div class="celula" id="celula-2-1"></div>
+          </td>
+          <td>
+            <div class="celula" id="celula-2-2"></div>
+          </td>
         </tr>
       </table>
     </div>
@@ -37,23 +64,23 @@
     <div class="inventario-container">
       <table class="inventario" id="inventario">
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
         </tr>
       </table>
     </div>
-    </div>
-    <div class="buttons">
-      <button id="start">Start</button>
-      <button id="pause">Pause</button>
-      <button id="restart">Restart</button>
-      <button id="skin">Skin</button>
-      <div class="circle1">
-        <div class="circle2"></div>
-      </div>
   </div>
 
+  <div class="buttons">
+    <button id="start">Start</button>
+    <button id="pause">Pause</button>
+    <button id="restart">Restart</button>
+    <button id="skin">Skin</button>
+    <div class="circle1">
+      <div class="circle2"></div>
+    </div>
+  </div>
 
   <script src="brain.js"></script>
 </body>
