@@ -123,7 +123,7 @@
     align-items: center;
     flex-direction: column;
     margin-right: 10px; 
-    margin-top: 50px;
+    margin-top: 20px;
   }
 
   .tabuleiro {
@@ -154,8 +154,8 @@
   }
 
   .inventario td {
-    width: 115px;
-    height: 75px;
+    width: 120px;
+    height: 120px;
     border-radius: 20px;
     text-align: left;
     color:#000000b2;
@@ -278,4 +278,12 @@
     height:1.15em;
     transform:rotate(45deg) skewX(22.5deg) skewY(22.5deg);
     box-shadow: 0 0 0 2px yellow, 0 0 20px yellow, 0 0 10px yellow inset;
+  }
+
+  .inventario .four-pointed-star {
+    /* Adicione estilos específicos para a estrela no inventário aqui */
+    width: 30px;
+    height: 30px;
+    background-color: yellow; /* ou qualquer outra cor desejada */
+    /* Adicione outros estilos conforme necessário */
   }
