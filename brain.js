@@ -7,13 +7,12 @@ const larguraQuadrado = 122; // Largura de cada quadrado do tabuleiro
 const alturaQuadrado = 122; // Altura de cada quadrado do tabuleiro
 const linhas = 3; // Número de linhas no tabuleiro
 const colunas = 3; // Número de colunas no tabuleiro
-const velocidadeMovimento = 250; // Velocidade de movimento em milissegundos
 
 // Posição inicial da personagem
 let posicaoX = 0;
 let posicaoY = 0;
 
-let emMovimento = false; // Variável para controlar se a personagem está em movimento
+let emMovimento = false;
 
 //Tempo Inicial do jogo
 let tempoRestante = 100;
@@ -38,62 +37,62 @@ function moverPersonagem(direcao) {
     return;
   }
 
-  if (emMovimento) {
-    return;
-  }
-
-  emMovimento = true;
+  let animationClass = '';
   let novoX = posicaoX;
   let novoY = posicaoY;
 
   // Calcular a nova posição com base na direção
   switch (direcao) {
     case "cima":
-      novoY = Math.max(0, posicaoY - 1);
+        animationClass = 'move-up';
+        novoX--;
       break;
     case "baixo":
-      novoY = Math.min(linhas - 1, posicaoY + 1);
+          animationClass = 'move-down';
+          novoX++;
       break;
     case "esquerda":
-      novoX = Math.max(0, posicaoX - 1);
+          animationClass = 'move-left';
+          novoY--;
       break;
     case "direita":
-      novoX = Math.min(colunas - 1, posicaoX + 1);
+        animationClass = 'move-right';
+        novoY++;
       break;
     default:
       return; // Direção inválida
   }
 
-  // Calcular as coordenadas em pixels da nova posição
-  const novoXPixel = novoX * larguraQuadrado;
-  const novoYPixel = novoY * alturaQuadrado;
-
-  // Animação de movimento
-  personagem.style.transition = `transform ${velocidadeMovimento}ms linear`;
-  personagem.style.transform = `translate(${novoXPixel}px, ${novoYPixel}px)`;
+  if (novoX < 0 || novoX > 2 || novoY < 0 || novoY > 2) return;
+  emMovimento = true;
 
   // Atualizar a posição atual da personagem
   posicaoX = novoX;
   posicaoY = novoY;
-
   console.log(`Nova posição: (${posicaoX}, ${posicaoY})`);
 
   adicionarPontos(1);
-  // Lidar com o término da animação
-  setTimeout(() => {
-    emMovimento = false; // Marcar que o movimento terminou
+
+  personagem.classList.add(animationClass);
+  personagem.addEventListener('animationend', () => {
+    emMovimento = false;
+    
+    const newCell = document.getElementById(`celula-${posicaoX}-${posicaoY}`);
+    if (newCell) newCell.appendChild(personagem);
+    
+    personagem.classList.remove(animationClass);
+
     gerarQuadrados();
     verificarColisao(); // Verificar colisão após o movimento
-  }, velocidadeMovimento);
+
+  }, {once: true});
+
 }
 
 
 // Lidar com eventos de pressionamento de tecla para as setas do teclado
-document.addEventListener("keydown", (event) => {
-  // Verificar se a personagem está em movimento
-  if (emMovimento) {
-    return;
-  }
+document.addEventListener("keyup", (event) => {
+
   if (!jogoIniciado) {
     return; // Impedir movimento se o jogo não tiver sido iniciado
   }

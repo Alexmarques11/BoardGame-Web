@@ -55,6 +55,7 @@
     bottom: 10px;
     position: relative;
     left: 25px;
+    z-index: 3;
   }
   
   .personagem__eye {
@@ -106,6 +107,7 @@
     margin-left: 50px;
     background: white;
     box-shadow: 0 0 0 2px white, 0 0 20px white, 0 0 10px white inset;
+    z-index: 2;
   }
 
   .container {
