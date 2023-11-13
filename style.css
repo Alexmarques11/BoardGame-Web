@@ -249,3 +249,31 @@
     margin-left: -65px;
     margin-top: -5px;
   }
+
+  .four-pointed-star {
+    position: relative;
+    width: 50%; /* Ocupa 100% da largura da célula */
+    height: 50%; /* Ocupa 100% da altura da célula */
+    font-size: 1em; /* Tamanho relativo à fonte base */
+    margin-left: 20px;
+    margin-top: -15px;
+  }  
+  .four-pointed-star:before{
+    content:"";
+    position:absolute;
+    background:yellow;
+    width:1em;
+    height:1.15em;
+    transform:rotate(-45deg) skewX(22.5deg) skewY(22.5deg);
+    box-shadow: 0 0 0 2px yellow, 0 0 20px yellow, 0 0 10px yellow inset;
+  }
+  
+  .four-pointed-star:after{
+    content:"";
+    position:absolute;
+    background:yellow;
+    width:1em;
+    height:1.15em;
+    transform:rotate(45deg) skewX(22.5deg) skewY(22.5deg);
+    box-shadow: 0 0 0 2px yellow, 0 0 20px yellow, 0 0 10px yellow inset;
+  }
