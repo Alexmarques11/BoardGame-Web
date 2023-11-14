@@ -15,7 +15,7 @@ let posicaoY = 0;
 let emMovimento = false;
 
 //Tempo Inicial do jogo
-let tempoRestante = 100;
+let tempoRestante = 60;
 
 let score = 0;
 let vidas = 10; // Ou qualquer valor inicial que você desejar
@@ -95,9 +95,6 @@ function moverPersonagem(direcao) {
   }, {once: true});
 
 }
-
-
-// Lidar com eventos de pressionamento de tecla para as setas do teclado
 document.addEventListener("keyup", (event) => {
 
   if (!jogoIniciado) {
@@ -123,7 +120,7 @@ document.addEventListener("keyup", (event) => {
 function detectarColisoes(posX, posY) {
   const celulaAtual = document.getElementById(`celula-${posX}-${posY}`);
   if (!celulaAtual) {
-    // A célula não existe, a posição está fora dos limites
+    // A célula não existe
     return;
   }
 
@@ -135,8 +132,7 @@ function detectarColisoes(posX, posY) {
     // Adicione pontos com base na cor do quadrado
     console.log(`Colisão com quadrado ${corQuadrado}`);
     adicionarPontos(pontosPorCor(corQuadrado));
-    // Remova o quadrado da célula
-    quadrado.remove();
+    // Remove o quadrado da célula
   } else if (estrela) {
     // Mova a estrela para o inventário
     moverParaInventario(estrela);
@@ -183,10 +179,11 @@ function adicionarPontos(quantidade) {
   if (score > bestScore) {
     bestScore = score;
     salvarBestScore();
+    atualizarBestScoreNaInterface();
   }
-
   console.log(`Adicionando ${quantidade} pontos. Nova pontuação: ${score}`);
 }
+
 
 // Função para remover vidas
 function removerVida(quantidade) {
@@ -198,7 +195,7 @@ function removerVida(quantidade) {
     vidasElement.textContent = `${vidas}`;
   }
 
-  // Verificar se o jogo acabou (quando não há mais vidas)
+  // Verificar se o jogo acabou
   if (vidas <= 0) {
     atualizarTemporizador(vidas);
   }
@@ -218,17 +215,16 @@ function gerarEstrela() {
 }
 
 function gerarQuadrados(posX, posY) {
-  // Remova todos os quadrados e estrelas existentes, exceto os do inventário
+  // Remover todos os quadrados e estrelas existentes, exceto os do inventário
   const quadradosEstrelasExistents = document.querySelectorAll('.square, .four-pointed-star');
   quadradosEstrelasExistents.forEach(item => {
     const celulaPai = item.closest('.celula');
     if (celulaPai && celulaPai.classList.contains('inventario')) {
-      return; // Ignora itens no inventário
+      return; 
     }
     item.remove();
   });
 
-  // Gere quadrados em todas as células, incluindo a célula da personagem
   const celulas = document.querySelectorAll('.celula');
 
   celulas.forEach(celula => {
@@ -247,13 +243,11 @@ function gerarQuadrados(posX, posY) {
       const quadrado = document.createElement('div');
       quadrado.classList.add('square');
 
-      // Adicione uma função para gerar uma cor aleatória
       const corAleatoria = gerarCorAleatoria();
       quadrado.style.backgroundColor = corAleatoria;
 
       celula.appendChild(quadrado);
     } else {
-      // Gere um quadrado normal em outras células
       const quadrado = document.createElement('div');
       quadrado.classList.add('square');
 
@@ -275,7 +269,7 @@ function gerarQuadrados(posX, posY) {
     quadradoExistente.remove();
   }
 
-  // Gere a estrela na célula
+  // Gerar a estrela na célula
   const estrela = document.createElement('div');
   estrela.classList.add('four-pointed-star');
   celulaEstrela.appendChild(estrela);
@@ -286,7 +280,6 @@ function gerarCorAleatoria() {
   // Lista de cores permitidas
   const coresPermitidas = ['#FFFFFF', '#FFFF00', '#FF0000', '#0000FF', '#008000'];
 
-  // Escolha aleatoriamente uma cor da lista de cores permitidas
   const indiceCor = Math.floor(Math.random() * coresPermitidas.length);
 
   return coresPermitidas[indiceCor];
@@ -294,7 +287,7 @@ function gerarCorAleatoria() {
 
 
 function atualizarTemporizador(vidas) {
-  tempoRestante--; // Reduz o tempo restante em 1 segundo
+  tempoRestante--; 
   const tempoElement = document.getElementById('tempo');
   const gameOverElement = document.getElementById('game-over');
 
@@ -303,7 +296,6 @@ function atualizarTemporizador(vidas) {
     tempoElement.textContent = 'Game Over!'; // Exibe "Game Over"
     gameOverElement.style.display = 'block'; // Exibe o elemento "Game Over"
     
-    // Esconda a personagem definindo a visibilidade como oculta
     personagem.style.visibility = 'hidden';
   } else {
     tempoElement.textContent = tempoRestante + ' seconds'; // Atualiza o elemento HTML com o tempo restante
@@ -314,28 +306,27 @@ let temporizador = null; // Variável para controlar o temporizador, inicializad
 
 // Função para iniciar o temporizador
 function iniciarTemporizador() {
-  // Verifique se já existe um temporizador em execução
   if (temporizador) {
-    clearInterval(temporizador); // Pare o temporizador anterior
+    clearInterval(temporizador); // Parar o temporizador anterior
   }
   temporizador = setInterval(atualizarTemporizador, 1000); // Inicie um novo temporizador
 }
 
 function iniciarJogo() {
-  // Redefina as variáveis do jogo
-  tempoRestante = 100; // Defina o tempo inicial novamente (ou o valor que desejar)
+  // Redefenir as variáveis do jogo
+  tempoRestante = 60; 
   posicaoX = 0; // Posição X inicial da personagem
   posicaoY = 0; // Posição Y inicial da personagem
   const startButton = document.getElementById('start');
   const pauseButton = document.getElementById('pause');
   const celulaInicial = document.getElementById("celula-0-0");
 
-  // Oculte o "Game Over"
+  // Ocultar o "Game Over"
   const gameOverElement = document.getElementById('game-over');
   gameOverElement.style.display = 'none';
 
   vidas = 10; 
-  score = 0; // Reinicie o score
+  score = 0; // Reiniciar o score
 
   // Atualize a exibição de vidas na interface
   const vidasElement = document.getElementById('vidas');
@@ -345,21 +336,21 @@ function iniciarJogo() {
 
   // Reposicione a personagem para a posição inicial
   personagem.style.transition = 'none';
-  personagem.style.transform = 'translate(0, 0)'; // Mova de volta para a posição inicial
-  personagem.style.visibility = 'visible'; // Tornar a personagem visível novamente
-  startButton.style.display = 'none'; // Oculte o botão "Start"
+  personagem.style.transform = 'translate(0, 0)'; 
+  personagem.style.visibility = 'visible'; 
+  startButton.style.display = 'none'; 
   pauseButton.style.marginTop = '64px';
 
   document.querySelectorAll(".square").forEach((quadrado) => quadrado.remove());
 
-  // Atualize o temporizador
+  // Atualizar o temporizador
   const tempoElement = document.getElementById('tempo');
   tempoElement.textContent = tempoRestante + ' seconds';
 
-  // Inicie o temporizador novamente
+
   iniciarTemporizador();
 
-  pausado = false; // Certifique-se de que o jogo não esteja em pausa
+  pausado = false; 
 
   // Gere quadrados após reiniciar o jogo
   gerarQuadrados(posicaoX, posicaoY);
@@ -386,10 +377,10 @@ function reiniciarJogo() {
 
   carregarBestScore();
 
-  // Limpe o inventário
+  // Limpar o inventário
   document.querySelectorAll('.inventario .square, .inventario .four-pointed-star').forEach(item => item.remove());
 
-  // Remova todos os quadrados e estrelas existentes, exceto os do inventário
+  // Remover todos os quadrados e estrelas existentes, exceto os do inventário
   const quadradosEstrelasExistents = document.querySelectorAll('.square, .four-pointed-star');
   quadradosEstrelasExistents.forEach(item => {
     const celulaPai = item.closest('.celula');
@@ -399,37 +390,37 @@ function reiniciarJogo() {
     item.remove();
   });
 
-  // Aguarde um curto período e, em seguida, reative a transição
+  // Aguardar um curto período e, em seguida, reative a transição
   setTimeout(() => {
     personagem.style.transition = 'transform 0.5s ease';
     gerarQuadrados(posicaoX, posicaoY); // Gere quadrados após reiniciar o jogo
   }, 10);
 
-  // Atualize a exibição de vidas na interface
+  // Atualizar a exibição de vidas na interface
   const vidasElement = document.getElementById('vidas');
   if (vidasElement) {
     vidasElement.textContent = `${vidas}`;
   }
 
-  // Atualize a exibição de pontos na interface
+  // Atualizar a exibição de pontos na interface
   const pontuacaoElement = document.getElementById('pontuacao');
   if (pontuacaoElement) {
     pontuacaoElement.textContent = `${score}`;
   }
 
-  // Atualize o temporizador
+  // Atualizar o temporizador
   const tempoElement = document.getElementById('tempo');
   tempoElement.textContent = tempoRestante + ' seconds';
 
-  // Reposicione a personagem para a posição inicial
+
   posicaoX = 0;
   posicaoY = 0;
 
   // Inicie o temporizador novamente
   iniciarTemporizador();
 
-  pausado = false; // Certifique-se de que o jogo não esteja em pausa
-  jogoIniciado = true; // Marque o jogo como iniciado
+  pausado = false; 
+  jogoIniciado = true; // Marcar o jogo como iniciado
 }
 
 document.getElementById('restart').addEventListener('click', () => {
@@ -440,7 +431,7 @@ document.getElementById('restart').addEventListener('click', () => {
 
 document.getElementById('start').addEventListener('click', () => {
   iniciarJogo();
-  jogoIniciado = true; // Marque o jogo como iniciado
+  jogoIniciado = true; // Marcar o jogo como iniciado
 });
 
 // Função para pausar/resumir o jogo
@@ -450,14 +441,14 @@ function pausarJogo() {
   if (pausado) {
     // Retomar o jogo
     pausado = false;
-    pauseButton.textContent = 'Pause'; // Atualize o texto do botão
-    personagem.style.pointerEvents = 'auto'; // Ative a movimentação da personagem
-    temporizador = setInterval(atualizarTemporizador, 1000); // Retome o temporizador
+    pauseButton.textContent = 'Pause'; // Atualizar o texto do botão pause
+    personagem.style.pointerEvents = 'auto'; // Ativar a movimentação da personagem
+    temporizador = setInterval(atualizarTemporizador, 1000); // Retomar o temporizador
   } else {
     // Pausar o jogo
     pausado = true;
     pauseButton.textContent = 'Resume'; // Atualize o texto do botão
-    personagem.style.pointerEvents = 'none'; // Desative a movimentação da personagem
+    personagem.style.pointerEvents = 'none'; // Desativar a movimentação da personagem
     clearInterval(temporizador); // Pausar o temporizador
   }
 }
@@ -473,9 +464,16 @@ function carregarBestScore() {
   const savedBestScore = localStorage.getItem(BEST_SCORE_KEY);
   if (savedBestScore !== null) {
     bestScore = parseInt(savedBestScore, 10);
+    atualizarBestScoreNaInterface();
   }
 }
 
+function atualizarBestScoreNaInterface() {
+  const bestScoreElement = document.getElementById('bestscore');
+  if (bestScoreElement) {
+    bestScoreElement.textContent = `${bestScore}`;
+  }
+}
 // Variável para controlar o estado da skin
 let skinAlterada = false;
 
@@ -483,7 +481,7 @@ let skinAlterada = false;
 let estadoSkin = 0; // 0 para a primeira skin, 1 para a segunda, 2 para a terceira
 
 function mudarSkin() {
-  // Obtenha referências aos elementos HTML que você deseja modificar a cor
+
   const body = document.body;
   const buttons = document.querySelectorAll('button');
   const personagem = document.getElementById('personagem');
@@ -580,7 +578,6 @@ function mudarSkin() {
       }
   ];
 
-  // Alterne entre as skins com base no estado atual
   body.style.backgroundColor = coresSkins[estadoSkin].body;
   buttons.forEach((button) => {
     button.style.backgroundColor = coresSkins[estadoSkin].buttons;
@@ -610,10 +607,10 @@ const botaoSkin = document.getElementById("skin");
 botaoSkin.addEventListener("click", mudarSkin);
 
 function moverParaInventario(estrela) {
-  // Clone a estrela para evitar problemas de referência
+
   const estrelaClonada = estrela.cloneNode(true);
 
-  // Adicione a estrela ao inventário
+  // Adicionar a estrela ao inventário
   const inventarioCelula = document.querySelector('.inventario');
   inventarioCelula.appendChild(estrelaClonada);
 

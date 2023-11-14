@@ -22,7 +22,6 @@
   .vidas{
     font-size: 18px;
     color: #fff;
-
   }
 
   .temporizador {
@@ -30,7 +29,13 @@
     color: #fff;
   }
 
-  #pontuacao, #vidas {
+  .bestscore {
+    font-size: 18 px;
+    color: #fff;
+    margin-left: 20px;
+  }
+
+  #pontuacao, #vidas, #bestscore {
     display: inline;
     margin-right: 15px;
     font-weight: bold;
@@ -106,7 +111,7 @@
     border-radius: 30%;
     margin-left: 50px;
     background: white;
-    box-shadow: 0 0 0 2px white, 0 0 20px white, 0 0 10px white inset;
+    box-shadow: 0 0 0 1px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255), 0 0 10px white inset;
     z-index: 2;
   }
 
@@ -161,6 +166,7 @@
     color:#000000b2;
     font-weight: bold;
     background-color: #b1949c;
+    box-shadow: 0 0 0 1px #b1949c, 0 0 10px rgb(0, 0, 0);
   }
 
   .buttons {
@@ -178,6 +184,7 @@
     padding: 10px;
     font-size: 14px;
     background-color: #b1949c;
+    box-shadow: 0 0 0 1px rgb(0, 0, 0), 0 0 10px rgb(0, 0, 0);
     color: #000000;
     border: none;
     cursor: pointer;
@@ -235,8 +242,9 @@
     color: #b1949c;
     padding: 20px;
     display: none; /* Inicialmente oculto */
-    margin-left: -65px;
-    margin-top: -5px;
+    margin-left: -75px;
+    margin-top: -50px;
+    z-index: 10;
   }
 
   .pausetext{
@@ -259,6 +267,7 @@
     font-size: 1em; /* Tamanho relativo à fonte base */
     margin-left: 20px;
     margin-top: -15px;
+    z-index: 2;
   }  
   .four-pointed-star:before{
     content:"";
@@ -281,9 +290,8 @@
   }
 
   .inventario .four-pointed-star {
-    /* Adicione estilos específicos para a estrela no inventário aqui */
     width: 30px;
     height: 30px;
     background-color: yellow; /* ou qualquer outra cor desejada */
-    /* Adicione outros estilos conforme necessário */
+
   }
